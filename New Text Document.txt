@@ -1,0 +1,143 @@
+# if 'user' not in session:
+    #     return redirect(url_for('login'))
+
+    # if request.method == 'POST':
+    #     # Capture a live image from the webcam using OpenCV
+    #     cap = cv2.VideoCapture(0)
+    #     ret, frame = cap.read()
+    #     cap.release()
+
+    #     if not ret:
+    #         flash('Failed to capture live image', 'danger')
+    #         return redirect(url_for('authenticate'))
+
+    #     # Load the stored image from the database for the authenticated user
+    #     username = session['user']
+    #     user = mongo.db.users.find_one({'username': username})
+
+    #     if not user:
+    #         flash('User not found', 'danger')
+    #         return redirect(url_for('authenticate'))
+
+    #     stored_image = np.frombuffer(user['image'], np.uint8)
+    #     stored_image = cv2.imdecode(stored_image, cv2.IMREAD_COLOR)
+
+    #     # Initialize MediaPipe Face Detection
+    #     mp_face_detection = mp.solutions.face_detection
+    #     face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.5)
+
+    #     # Detect faces in the live image
+    #     with mp_face_detection.FaceDetection(min_detection_confidence=0.5) as face_detection:
+    #         live_image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    #         results = face_detection.process(live_image_rgb)
+
+    #     if results.detections:
+    #         for detection in results.detections:
+    #             bboxC = detection.location_data.relative_bounding_box
+    #             ih, iw, _ = frame.shape
+    #             x, y, w, h = int(bboxC.xmin * iw), int(bboxC.ymin * ih), \
+    #                          int(bboxC.width * iw), int(bboxC.height * ih)
+
+    #             # Extract the face region from the live image
+    #             live_face = frame[y:y + h, x:x + w]
+
+    #             # Perform image comparison (e.g., using template matching)
+    #             similarity = template_matching(stored_image, live_face)
+
+    #             if similarity > 0.7:  # Adjust the threshold as needed
+    #                 flash('Authentication successful', 'success')
+    #             else:
+    #                 flash('Authentication failed', 'danger')
+
+    # return render_template('authenticate.html')
+
+
+
+
+
+
+
+
+
+
+
+
+    
+#     if 'user' not in session:
+#         return redirect(url_for('login'))
+
+#     if request.method == 'POST':
+#         try:
+#             # Capture a live image from the webcam using OpenCV
+#             cap = cv2.VideoCapture(0)
+#             ret, frame = cap.read()
+#             cap.release()
+
+#             if not ret:
+#                 flash('Failed to capture live image', 'danger')
+#                 return redirect(url_for('authenticate'))
+
+#             # Load the stored image from the database for the authenticated user
+#             username = session['user']
+#             user = mongo.db.users.find_one({'username': username})
+
+#             if not user:
+#                 flash('User not found', 'danger')
+#                 return redirect(url_for('authenticate'))
+
+#             stored_image = np.frombuffer(user['image'], np.uint8)
+#             stored_image = cv2.imdecode(stored_image, cv2.IMREAD_COLOR)
+
+#             # Initialize MediaPipe Face Detection
+#             mp_face_detection = mp.solutions.face_detection
+#             face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.5)
+
+#             # Detect faces in the live image
+#             with mp_face_detection.FaceDetection(min_detection_confidence=0.5) as face_detection:
+#                 live_image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#                 results = face_detection.process(live_image_rgb)
+
+#             if results.detections:
+#                 for detection in results.detections:
+#                     bboxC = detection.location_data.relative_bounding_box
+#                     ih, iw, _ = frame.shape
+#                     x, y, w, h = int(bboxC.xmin * iw), int(bboxC.ymin * ih), \
+#                                  int(bboxC.width * iw), int(bboxC.height * ih)
+
+#                     # Extract the face region from the live image
+#                     live_face = frame[y:y + h, x:x + w]
+
+#                     # Perform image comparison (e.g., using template matching)
+#                     is_authenticated, similarity = template_matching(stored_image, live_face)
+
+#                     if is_authenticated and similarity > 0.7:  # Adjust the threshold as needed
+#                         flash('Authentication successful', 'success')
+#                     else:
+#                         flash('Authentication failed', 'danger')
+#         except Exception as e:
+#             flash(f'Error during authentication: {str(e)}', 'danger')
+
+#     return render_template('authenticate.html')
+
+# def template_matching(stored_face, live_face):
+#     # Convert images to grayscale for template matching
+#     stored_face_gray = cv2.cvtColor(stored_face, cv2.COLOR_BGR2GRAY)
+#     live_face_gray = cv2.cvtColor(live_face, cv2.COLOR_BGR2GRAY)
+
+#     # Perform template matching with normalized cross-correlation
+#     result = cv2.matchTemplate(live_face_gray, stored_face_gray, cv2.TM_CCOEFF_NORMED)
+    
+#     # Find the maximum correlation score and its location
+#     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+    
+#     # Define a threshold for similarity (adjust as needed)
+#     threshold = 0.7
+
+#     # Check if the maximum correlation score exceeds the threshold
+#     if max_val >= threshold:
+#         return True, max_val
+#     else:
+#         return False, max_val
+
+# # Example usage:
+# # stored_face and live_face should be the face regions to compare (numpy arrays)
