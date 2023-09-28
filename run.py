@@ -10,7 +10,7 @@ import base64
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydb'  # MongoDB connection URL
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydb'
 
 mongo = PyMongo(app)
 bcrypt = Bcrypt(app)
@@ -30,10 +30,8 @@ def register():
         password = request.form.get('password')
         image = request.files['image']
 
-        # Hash the password before storing it in the database
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        # Store the user data in MongoDB
         user_data = {
             'username': username,
             'password': hashed_password,
