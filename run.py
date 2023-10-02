@@ -10,7 +10,7 @@ import base64
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydb'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydb'  # MongoDB connection URL
 
 mongo = PyMongo(app)
 bcrypt = Bcrypt(app)
@@ -22,6 +22,31 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    # if 'user' in session:
+    #     return redirect(url_for('index'))
+
+    # if request.method == 'POST':
+    #     username = request.form.get('username')
+    #     password = request.form.get('password')
+    #     image = request.files['image']
+
+    #     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    #     user_data = {
+    #         'username': username,
+    #         'password': hashed_password,
+    #         'image': image.read()
+    #     }
+    #     mongo.db.users.insert_one(user_data)
+
+    #     flash('Your account has been created!', 'success')
+    #     return redirect(url_for('login'))
+
+    # return render_template('register.html')
+
+
+
+
     if 'user' in session:
         return redirect(url_for('index'))
 
@@ -29,6 +54,12 @@ def register():
         username = request.form.get('username')
         password = request.form.get('password')
         image = request.files['image']
+
+        # Check if the username already exists in the database
+        existing_user = mongo.db.users.find_one({'username': username})
+        if existing_user:
+            flash('Username already exists. Please choose a different username.', 'danger')
+            return redirect(url_for('register'))
 
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
@@ -43,6 +74,7 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
