@@ -7,6 +7,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import base64
+import face_recognition
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -197,7 +198,7 @@ def authenticate():
 
         # Convert the binary image data to a NumPy array
         stored_image = np.frombuffer(stored_image_binary, np.uint8)
-        stored_image = cv2.imdecode(stored_image, cv2.IMREAD_COLOR)
+        stored_image = cv2.imdecode(stored_image, cv2.IMREAD_COLOR) #known face encoding image1 in numpy arrey
 
         # Initialize MediaPipe Face Detection
         mp_face_detection = mp.solutions.face_detection
@@ -217,11 +218,28 @@ def authenticate():
 
                 # Extract the face region from the live image
                 live_face = frame[y:y + h, x:x + w]
+                np_live_image = np.array(live_image_rgb)
+                print(np_live_image)
+
+                # live_face_encoding= face_recognition.face_encodings(np_live_image)[0]
+
+                live_face_encodings = face_recognition.face_encodings(np_live_image)
+
+                if live_face_encodings:
+                    live_face_encoding = live_face_encodings[0]
+                    # Rest of your code for authentication
+                else:
+                    flash('No face found in the live image', 'danger')
+                    # Handle the case where no face is detected in the live image
+
+
+                stored_face_encoding_db= face_recognition.face_encodings(stored_image)[0]
+                
 
                 # Perform image comparison (template matching)
-                similarity = template_matching(stored_image, live_face)
+                similarity = face_recognition.compare_faces([live_face_encoding], stored_face_encoding_db)
 
-                if similarity > 0.7:  # Adjust the threshold as needed
+                if similarity[0]:  # no adjustment
                     flash('Authentication successful', 'success')
                 else:
                     flash('Authentication failed', 'danger')
