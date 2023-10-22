@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .registration-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #0074D9;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h1>Registration</h1>
+        <form id="registration-form">
+            <input type="text" id="username" name="username" placeholder="Username">
+            <input type="password" id="password" name="password" placeholder="Password">
+            <input type="file" id="image" name="image">
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <div id="registration-status"></div>
+
+    <script>
+        // JavaScript code to handle registration form submission
+        document.getElementById('registration-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch('http://127.0.0.1:5000/register', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === "Username is already in use.") {
+                    alert("Username is already in use. Please choose a different username.");
+                } else {
+                    window.location.href = "http://127.0.0.1:5500/login.html"; // Redirect to the login page
+                }
+            });
+        });
+    </script>
+</body>
+</html>

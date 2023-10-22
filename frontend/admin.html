@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin Page</h1>
+<p id="adminInfo"></p>
+
+<script>
+    function getAdminInfo() {
+        fetch('http://127.0.0.1:5000/admin', {
+            method: 'GET',
+            credentials: 'include'
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    document.getElementById('adminInfo').innerText = 'Unauthorized access to the admin page';
+                    return Promise.reject('Unauthorized');
+                }
+            })
+            .then(data => {
+                const adminInfo = data.users.map(user => `Username: ${user.username}, User Image: ${user.user_image}`).join('<br>');
+                document.getElementById('adminInfo').innerHTML = adminInfo;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    getAdminInfo();
+</script>
+
+</body>
+</html>
