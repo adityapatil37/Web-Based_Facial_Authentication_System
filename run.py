@@ -233,11 +233,11 @@ def authenticate():
                     # Handle the case where no face is detected in the live image
 
 
-                stored_face_encoding_db= face_recognition.face_encodings(stored_image)[0]
+                stored_face_encoding_db= face_recognition.face_encodings(stored_image)[0]  #stored face encoding ho rhi
                 
 
                 # Perform image comparison (template matching)
-                similarity = face_recognition.compare_faces([live_face_encoding], stored_face_encoding_db)
+                similarity = face_recognition.compare_faces([live_face_encoding], stored_face_encoding_db)   #yaha face comparison karna hai
 
                 if similarity[0]:  # no adjustment
                     flash('Authentication successful', 'success')
@@ -251,7 +251,7 @@ def authenticate():
         _, buffer = cv2.imencode('.jpg', frame)
         live_image_data = base64.b64encode(buffer).decode()
 
-    return render_template('authenticate.html', live_image=f'data:image/jpeg;base64,{live_image_data}')
+    return render_template('authenticate.html', live_image=f'data:image/jpeg;base64,{live_image_data}', authStutus="Authentication sucessfull")
 
 # Template Matching Function
 def template_matching(template, target):

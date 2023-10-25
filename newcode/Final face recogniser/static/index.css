@@ -1,0 +1,58 @@
+body {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: black;
+    background-image: url('https://media2.giphy.com/media/AQnNk7CdzGnvnVSpz9/giphy.gif?cid=ecf05e475o0b52sq276rjgm37te3p8ks29mf5su3abpbfz90&ep=v1_gifs_search&rid=giphy.gif&ct=g');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    backdrop-filter: blur(5px);
+}
+
+h1{
+    color: #a17f7fbe;
+    font-weight: bolder;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-style: groove;
+    padding: 2%;
+}
+.container {
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.14); /* Add a semi-transparent white overlay */
+    border-radius: 10px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+}
+
+
+.links {
+    margin: 10px;
+}
+
+.links a {
+    display: inline-block;
+    text-decoration: none;
+    margin: 10px 100px;
+    padding: 10px 20px;
+    background-color: #007bff5a;
+    color: #000000;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.links a:hover {
+    background-color: #1f2e429b;
+    color: aliceblue;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 1),
+    0 0 20px rgba(0, 255, 255, 1),
+    0 0 30px rgba(0, 255, 255, 1),
+    0 0 40px rgba(0, 255, 255, 1);
+}
