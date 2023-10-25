@@ -4,36 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project Exhibition</title>
+    <link rel="stylesheet" href="../static/signup.css">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/login.css">
   </head>
   <body style="background-color: rgba(0, 0, 0, 0.542);">
     <div class="container">
         <div class="mx-auto" style="width: 20rem;
         margin-top: 10rem;">
             <div>
-              <div class="title">LOGIN</div>
-                <form method="POST" enctype="multipart/form-data" action="/login">
+                <form method="POST" enctype="multipart/form-data" action="/signup">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" name="userName" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" name="userName" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
                           </svg>
                         </span>
-                        <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="password" name="password1" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><img src="" alt=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                          </svg></span>
+                        <input type="password" name="password2" class="form-control" placeholder="Re-enter your Password" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <label class="form-label" for="customFile" style="color: rgba(7, 86, 86, 0.595);">Upload Your Image</label>
+                    <input type="file" class="form-control" name="image" accept=".jpg, .png, .jpeg" required id="customFile" />
                     <br>
-                    <button class=" input-group mb-3 d-grid gap-1 " type="submit">Login</button>
+                    <button class=" input-group mb-3 d-grid gap-1" type="submit">Register</button>
+                    <p style="color: green;">{{status}}</p>
                 </form>
-                <p style="color: green;">{{status}}</p>
-                <p>Don't have an account? <a href="/signup_form">Sign up</a></p>
+                <p>Already have an account? <a href="/login_form">Login</a></p>
+
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   </body>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../static/capture.css">
+    <title>Camera Capture</title>
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.542);">
+    <div class="container">
+        <div class="frame">
+
+            <div class="video">
+                <video id="video" autoplay></video>
+            </div>
+            <button id="startbutton">Capture</button> 
+            <div class="canvas">
+                <canvas id="canvas"></canvas>
+            </div> 
+
+        </div>             
+        <div>
+            <div id="status">Align your face in the Frame</div>
+        </div>
+
+    </div>
+
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const startbutton = document.getElementById('startbutton');
+        let stream;
+
+        startbutton.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob((blob) => {
+                const formData = new FormData();
+                formData.append('photo', blob, 'photo.png');
+
+                fetch('/verify', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+            // Access the 'message' property from the JSON response
+                    if(data.status===200){
+                        document.getElementById('status').innerHTML = data.user;
+                        window.location.href="/dashboard";
+
+                    }else{
+                        document.getElementById('status').innerHTML = data.message;            
+
+                    }
+
+
+            // Update the HTML element with the received message
+                    
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }, 'image/jpg');
+        });
+
+        async function initCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing the camera:', error);
+            }
+        }
+
+        window.addEventListener('load', initCamera);
+    </script>
+</body>
+</html>
