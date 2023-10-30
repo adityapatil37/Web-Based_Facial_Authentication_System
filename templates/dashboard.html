@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            background: url('https://media2.giphy.com/media/eLdZeAaOIY0N021kJp/giphy.gif?cid=ecf05e47obovumnqswd4q1s8aayf056rc5n2hym7so34p3ne&ep=v1_gifs_search&rid=giphy.gif&ct=g') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(0px);
+        }
+
+        div {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 24px;
+        }
+
+        div:first-child {
+            margin-top: 20%;
+        }
+
+        div:last-child {
+            margin-top: 10px;
+        }
+        button{
+            background-color:rgba(36, 41, 77, 0.615);
+            color: yellowgreen;
+            border: none;
+            margin-top: 5%;
+            margin-left: 37%;
+            margin-right: 40%;
+            max-width: 400px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        button:hover{
+            background-color: rgba(0, 0, 0, 0.889);
+            color: rgba(153, 205, 50, 0.532);
+        }
+    </style>
+</head>
+<body>
+    <div>HELLO..</div>
+    <div>{{user}}</div>
+    <form action="/logout" method="post">
+
+        <button class=" input-group mb-3 d-grid gap-1 " type="submit">Logout</button>
+    </form>
+    
+</body>
+</html>

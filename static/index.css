@@ -1,0 +1,59 @@
+body {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: black;
+    background-image: url('https://media0.giphy.com/media/l4KihuqeuJEi9qLSM/200w.webp?cid=ecf05e47nxgwl0n7d6v0fjqglnfqf175e2m38qfyb9jq9ldt&ep=v1_gifs_search&rid=200w.webp&ct=g');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    backdrop-filter: blur(10px);
+}
+
+h1{
+    font-size: 30px;
+    text-align: center;
+    color: #e8cdf4be;
+    font-weight: bolder;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2%;
+}
+.container {
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.14); /* Add a semi-transparent white overlay */
+    border-radius: 10px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+}
+
+
+.links {
+    margin: 10px;
+}
+
+.links a {
+    display: inline-block;
+    text-decoration: none;
+    margin: 10px 100px;
+    padding: 10px 20px;
+    background-color: #e8cdf4be;
+    color: #000000;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.links a:hover {
+    background-color: #e8cdf4f8;
+    color: rgb(211, 146, 246);
+    box-shadow: 0 0 10px rgb(249, 216, 248),
+    0 0 20px rgb(249, 216, 248),
+    0 0 30px rgb(249, 216, 248),
+    0 0 40px rgb(249, 216, 248);
+}

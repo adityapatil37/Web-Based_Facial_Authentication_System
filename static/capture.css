@@ -1,0 +1,95 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    background-image: url('https://media4.giphy.com/media/077i6AULCXc0FKTj9s/giphy.gif?cid=ecf05e47duon8f4gncbxa3hr1q8odp5h4k1gyyq3rjfimobr&ep=v1_gifs_search&rid=giphy.gif&ct=g');
+    filter: blur();
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    backdrop-filter: blur(5px);
+}
+
+.container {
+    background-color: rgba(139, 109, 109, 0); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.frame {
+    border: 1px solid #7d6868;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.video{
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+#canvas{
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+}
+
+video, canvas {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+#startbutton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 128px;
+    background-color: #21436767;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#startbutton:hover {
+    background-color: #0a1e335f;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 1),
+    0 0 20px rgba(0, 255, 255, 1),
+    0 0 30px rgba(0, 255, 255, 1),
+    0 0 40px rgba(0, 255, 255, 1);
+}
+
+#status {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #00ff006d;
+    color: #2e2e2e;
+    padding: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
