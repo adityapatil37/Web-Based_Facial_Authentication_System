@@ -32,9 +32,10 @@ mongo = PyMongo(app)
 bcrypt = Bcrypt(app)
 
 
+
 @app.route('/')
 def first():
-    return render_template('index.html')  #    <script src="../static/scripts.js"></script>
+    return render_template('index.html')  #<script src="../static/scripts.js"></script>
 
 @app.route('/signup_form', methods=['POST','GET'])
 def signup_form():
