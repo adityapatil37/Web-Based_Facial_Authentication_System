@@ -1,0 +1,136 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+// Function to validate the MIME type of an uploaded image file
+function validateImageFileType(fileInput) {
+  const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif']; // Define the allowed MIME types
+
+  if (fileInput.files.length === 0) {
+    alert('Please select an image file.');
+    return false;
+  }
+
+  const selectedFile = fileInput.files[0];
+  const selectedMimeType = selectedFile.type;
+
+  if (!allowedMimeTypes.includes(selectedMimeType)) {
+    alert('Invalid file type. Please select a valid image file (JPEG, PNG, or GIF).');
+    fileInput.value = ''; // Clear the file input field
+    return false;
+  }
+
+  // File type is valid
+  return true;
+}
+
+// Example usage in HTML:
+{/* 
+<input type="file" id="imageFileInput" onchange="validateImageFileType(this)">
+<button onclick="uploadImage()">Upload</button>
+*/}
+
+
+// Rate limiting configuration
+const rateLimitConfig = {
+  requestsPerMinute: 10, // Maximum number of requests per minute
+  refillRate: 10, // Number of tokens refilled per minute
+};
+
+// Token bucket implementation
+class TokenBucket {
+  constructor(rateLimitConfig) {
+    this.rateLimitConfig = rateLimitConfig;
+    this.tokens = 0;
+    this.lastRefill = Date.now();
+  }
+
+  acquireToken() {
+    // Check if there are enough tokens in the bucket
+    if (this.tokens < 1) {
+      // If not, refill the bucket
+      const now = Date.now();
+      const refilledTokens = Math.min(this.rateLimitConfig.refillRate, (now - this.lastRefill) / 60);
+      this.tokens += refilledTokens;
+      this.lastRefill = now;
+    }
+
+    // If there are enough tokens, consume one and return true
+    if (this.tokens >= 1) {
+      this.tokens--;
+      return true;
+    }
+
+    // Otherwise, return false
+    return false;
+  }
+}
+
+// Web image authentication using token bucket rate limiting
+async function authenticateImage(imageUrl) {
+  // Get the token bucket for the current user
+  const tokenBucket = new TokenBucket(rateLimitConfig);
+
+  // Try to acquire a token
+  if (!tokenBucket.acquireToken()) {
+    // If the token bucket is empty, return an error
+    return new Error("Rate limit exceeded");
+  }
+
+  // Make the image authentication request
+  const response = await fetch(imageUrl);
+
+  // If the request was successful, return the image data
+  if (response.ok) {
+    return await response.blob();
+  }
+
+  // Otherwise, return an error
+  return new Error("Image authentication failed");
+}
+
+// Example usage
+const imageUrl = "https://example.com/image.jpg";
+
+async function main() {
+  const imageData = await authenticateImage(imageUrl);
+
+  // Do something with the image data
+}
+
+main();
+
+
+// Express.js example for setting up CORS and CSP headers in Node.js
+const express = require('express');
+const helmet = require('helmet'); // Helmet middleware for enhanced security
+const app = express();
+
+// Enable CORS with appropriate configurations
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://yourtrusteddomain.com'); // Replace with your trusted domain
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
+// Enable CSP with appropriate policies
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"], // Allow resources to be loaded from the same origin
+      scriptSrc: ["'self'", 'https://trusted-scripts.com'],
+      styleSrc: ["'self'", 'https://trusted-styles.com'],
+      imgSrc: ["'self'", 'https://trusted-images.com'],
+      // Add more directives as needed (e.g., connectSrc, fontSrc, etc.)
+    },
+  })
+);
+
+// Serve your web application
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: __dirname });
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
